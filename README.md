@@ -1,4 +1,4 @@
-# test_project
+# Laundry App
 
 A new Flutter project.
 
