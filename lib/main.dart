@@ -16,7 +16,45 @@ void main() async{
   Hive.registerAdapter(ClothAdapter());
   runApp(LaundryApp());
 }
+class CustomTextBox extends StatelessWidget {
+  final TextEditingController controller;
+  final String name;
+  const CustomTextBox({
+    required this.controller,
+    required this.name,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context){
+    return Padding(
+      padding: EdgeInsets.all(3),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, // Full white background
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26, // Shadow color
+              blurRadius: 8.0,       // Blur radius
+              offset: Offset(0, 4),  // Shadow offset
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10.0), // Rounded corners
+        ),
+        child: TextField(
+          controller: this.controller,
+          decoration: InputDecoration(
 
+              labelText: name,
+
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.all(8)
+          ),
+
+        ),
+      ),
+    );
+  }
+}
 class LoginPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController hostelController = TextEditingController();
@@ -108,24 +146,12 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(),
-              ),
-            ),
+            CustomTextBox(controller: nameController, name: 'Name',),
             SizedBox(height: 16),
             GestureDetector(
               onTap: () => _showHostelSelection(context),
               child: AbsorbPointer(
-                child: TextField(
-                  controller: hostelController,
-                  decoration: InputDecoration(
-                    labelText: 'Hostel',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
+                child: CustomTextBox(controller: hostelController, name: 'Hostel')
               ),
             ),
             SizedBox(height: 32),
@@ -133,6 +159,14 @@ class LoginPage extends StatelessWidget {
               onPressed: () => _login(context),
               child: Text('Login'),
             ),
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/background.png'),
+                    fit: BoxFit.cover
+                )
+              ),
+            )
           ],
         ),
       ),
@@ -395,7 +429,9 @@ class HomePage extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20),
               child: Text(
                 'Welcome, $name',
-                style: const TextStyle(fontSize: 30),
+                style: const TextStyle(fontSize: 26,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
