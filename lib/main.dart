@@ -90,7 +90,10 @@ class LoginPage extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey, // Gray background color for boxes
+                    image: DecorationImage(
+                        image: AssetImage('assets/Hostel/${hostels[index]}.png')
+                    ), // Gray background color for boxes
+
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
@@ -146,8 +149,11 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+
             CustomTextBox(controller: nameController, name: 'Name',),
+
             SizedBox(height: 16),
+
             GestureDetector(
               onTap: () => _showHostelSelection(context),
               child: AbsorbPointer(
@@ -159,14 +165,7 @@ class LoginPage extends StatelessWidget {
               onPressed: () => _login(context),
               child: Text('Login'),
             ),
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/background.png'),
-                    fit: BoxFit.cover
-                )
-              ),
-            )
+
           ],
         ),
       ),
